@@ -1,27 +1,31 @@
+
 # DevRunner 🚀
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-%235391FE?logo=powershell&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
 
-**DevRunner** ist ein PowerShell-Automatisierungstool, das eine standardisierte Projektstruktur (*Scaffolding*) für neue Softwareprojekte erstellt. Es richtet Ordner ein, erstellt notwendige Konfigurationsdateien und öffnet das Projekt direkt in VS Code.
+**DevRunner** ist ein PowerShell-Automatisierungstool mit nativer WPF/XAML-Benutzeroberfläche. Es erstellt eine standardisierte Projektstruktur (*Scaffolding*) für neue Softwareprojekte, richtet Ordner und Konfigurationsdateien ein und bootet das Projekt direkt in der gewählten IDE (z. B. VS Code).
 
-> 🎓 **Hinweis:** Das Skript ist ausführlich kommentiert, um als Lernressource für PowerShell-Grundlagen (FIAE/Ausbildung) zu dienen.
+![DevRunner GUI v9](docs/img/DevRunner_v9.png)
+
+> 🎓 **Hinweis:** Dieses Tool wurde entwickelt, um den eigenen Entwickler-Workflow zu optimieren und tiefgreifendes Wissen in der Verbindung von PowerShell-Backend-Logik und XAML-Frontend-Design aufzubauen.
 
 ---
 
 ## ✨ Features
 
-* **Interaktiv:** Fragt Projektname und Speicherort ab (Standard: `C:\Projekte`).
-* **Struktur:** Erstellt automatisch Verzeichnisse für Sourcecode (`src`), Tests, Dokumentation und Daten.
-* **Boilerplate:** Legt leere Dateien wie `.gitignore`, `.env` und `requirements.txt` an.
-* **Dokumentation:** Erstellt automatisch eine initiale `README.md` im neuen Projekt.
-* **Workflow:** Öffnet das fertige Projekt sofort in Visual Studio Code.
-* **Edukativ:** Enthält eine Legende und Erklärungen zu Befehlen wie `Join-Path`, `Test-Path` und `New-Item`.
+* **Grafisches UI (WPF):** Komplett eigenständiges Fenster-Design ohne Standard-Windows-Rahmen (Custom Drawing Paths, XAML).
+* **Automatisierte Struktur:** Erstellt Verzeichnisse für Sourcecode (`src`), Tests, Dokumentation und Daten.
+* **Boilerplate-Generierung:** Legt automatisch `.gitignore`, `.env`, `requirements.txt` und eine initiale `README.md` an.
+* **Nahtloser Workflow:** Öffnet das fertige Projekt sofort in Visual Studio Code oder JetBrains IDEs.
+* **Saubere Architektur:** Strikt getrennte Logik zwischen GUI-Rendering (XAML) und Backend-Funktionen (PowerShell).
 
-## 📂 Erzeugte Struktur
+---
 
-Jedes neue Projekt erhält automatisch diesen Aufbau:
+## 📂 Erzeugte Projekt-Struktur
+
+Jedes neue Projekt erhält automatisch diesen sauberen Aufbau:
 
 ```text
 MeinProjekt/
@@ -37,65 +41,81 @@ MeinProjekt/
 ├── .gitignore
 ├── requirements.txt
 └── README.md
-```
+````
+
+---
+
 ## ⚙️ Installation & Einrichtung
 
-Um den Befehl `newpro` dauerhaft in deiner PowerShell nutzen zu können, folge diesen Schritten:
+Um DevRunner komfortabel als globalen Befehl (Alias) nutzen zu können:
 
 ### 1. Skript ablegen
-Erstelle einen Ordner `Tools` in deinem Benutzerverzeichnis und speichere das Skript dort.
-* **Pfad:** `C:\Users\DEIN_USER\Tools\erstelle_projekt.ps1`
+
+Speichere das Projekt in deinem Tools-Verzeichnis ab:
+
+**Pfad:**
+`C:\Users\DEIN_USER\Tools\DevRunner\`
+
+---
 
 ### 2. PowerShell Profil konfigurieren
----
-Öffne dein PowerShell-Profil mit folgendem Befehl:
+
+Öffne dein PowerShell-Profil:
 
 ```powershell
 code $PROFILE
 ```
-### 3. Alias erstellen
-Füge dort folgenden Code hinzu, um den Alias zu erstellen:
-```powershell
-Set-Alias -Name 'newpro' -Value Start-ProjectScaffolder
-```
 
-### 4. Profil neu laden
-Starte dein Terminal neu oder lade das Profil direkt neu:
-```powershell
-. $PROFILE
-```
-
-### Nutzung
-Tippe einfach den Alias in dein Terminal:
-
-```PowerShell
-newpro
-```
 ---
 
-### Folge den Anweisungen auf dem Bildschirm:
+### 3. Alias erstellen
 
-1.  **Name:** Gib den Projektnamen ein (z.B. `WetterApp`).
-2.  **Pfad:** Bestätige mit `Enter` (für Standard `C:\Projekte`) oder gib einen eigenen Pfad an.
+Füge folgenden Code hinzu, um den DevRunner aus jedem Terminal heraus starten zu können:
 
-✅ **Das Tool erstellt alles und startet VS Code automatisch.**
+```powershell
+Set-Alias -Name 'newpro' -Value "C:\Users\DEIN_USER\Tools\DevRunner\START.vbs" # Pfad ggf. anpassen
+```
+
+---
+
+### 4. Nutzung
+
+Lade das Terminal neu und tippe den Alias ein. Das DevRunner UI öffnet sich sofort:
+
+```powershell
+newpro
+```
+
+---
+
+## 📈 Project Evolution (Vom Skript zur App)
+
+DevRunner hat sich von einem simplen CLI-Skript zu einer vollwertigen Desktop-Oberfläche entwickelt. Dieser Verlauf spiegelt meinen Fokus auf kontinuierliche UI/UX-Verbesserung wider:
+
+**v5.0: Production Polish**
+Finalisierung des UI-Designs mit Fokus auf Konsistenz, User Experience und klaren Status-Indikatoren.
+
+**v3.0: Branding & Identity**
+Einführung des Cyberpunk-Designs, "SYSTEM_OVERRIDE"-Headers und ersten Status-Anzeigen.
+
+**v2.0: WPF Integration (MVP)**
+Der erste Schritt weg von der reinen Konsole hin zur Einbindung von XAML direkt in PowerShell.
+
+**v1.0: CLI Roots (Proof of Concept)**
+Das ursprüngliche Skript zur Automatisierung der reinen Ordnerstrukturen im Terminal.
 
 ---
 
 ## 📝 Voraussetzungen
 
-Damit alles reibungslos funktioniert, benötigst du:
-
-* **PowerShell:** Version 5.1 oder neuer (PowerShell 7+ empfohlen).
-* **Visual Studio Code:** Muss installiert sein (der Befehl `code` muss im `PATH` liegen).
-* **Execution Policy:** Muss das Ausführen von Skripten erlauben.
-
-```powershell
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-##
-⚖️ Lizenz
-Dieses Projekt ist unter der MIT License lizenziert.
+* **PowerShell:** Version 5.1 oder neuer.
+* **Execution Policy:** Muss das Ausführen von Skripten erlauben
+  (`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`).
 
 ---
+
+## ⚖️ Lizenz
+
+Dieses Projekt ist unter der MIT License lizenziert.
+
+
